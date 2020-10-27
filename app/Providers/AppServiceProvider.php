@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         ///Log::info(request()->url()." || params :".json_encode(request()->all()));
-
+        if (request()->header('lang' )=='en') {
+            app()->setLocale('en');
+        } else {
+            \app()->setLocale('vn');
+        }
     }
 }

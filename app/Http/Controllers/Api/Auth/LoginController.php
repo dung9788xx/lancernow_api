@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\Auth;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -26,7 +27,7 @@ class LoginController extends Controller
         }else{
             return response()->json([
                 'code'=>403,
-                'message'=>'Invalid email or password'
+                'message'=>trans('response.invalidEmailPassword')
             ],200);
         }
     }
