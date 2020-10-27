@@ -1,4 +1,4 @@
-FROM php:7.2-fpm
+FROM php:7.4-fpm
 
 WORKDIR /var/www
 
@@ -19,17 +19,13 @@ RUN apt-get update && apt-get install -y \
     curl \
     autoconf \
     pkg-config \
-    libssl-dev
-
-#install mongodb
-RUN pecl install mongodb
-RUN docker-php-ext-install bcmath
-RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
-RUN echo "extension=mongodb.so" >> php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"
-
+    libssl-dev \
+    libzip-dev \
+    libonig-dev
 # Install extensions
 RUN docker-php-ext-install pdo_mysql mbstring zip exif pcntl
-RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+
 RUN docker-php-ext-install gd
 
 # Clear cache
