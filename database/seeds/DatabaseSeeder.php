@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,6 +14,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' =>'admin@gmail.com',
             'password' => Hash::make('password'),
+            'role' => \App\Enum\UserRole::ADMIN
         ]);
 //        $this->call(UsersTableSeeder::class);
     }

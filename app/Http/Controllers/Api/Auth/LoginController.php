@@ -22,7 +22,7 @@ class LoginController extends Controller
             $token = Auth::user()->createToken('Token Name')->accessToken;
             return response()->json([
                 'code'=>200,
-                'message'=>$token
+                'data'=>$token
             ],200);
         }else{
             return response()->json([
