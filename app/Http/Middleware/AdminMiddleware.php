@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Enum\UserRole;
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AdminMiddleware
@@ -17,15 +18,15 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        Log::info(json_decode(request()->header('Authorization')));
-        if( isset($request->user()->role) && $request->user()->role == UserRole::ADMIN){
-            return $next($request);
-        }else {
-            return response()->json([
-                'code'=>403,
-                'data'=>"Permission denied"
-            ],200);
-        }
-
+//        Log::info(Auth::user());
+//        if( isset($request->user()->role) && $request->user()->role == UserRole::ADMIN){
+//            return $next($request);
+//        }else {
+//            return response()->json([
+//                'code'=>403,
+//                'data'=>"Permission denied"
+//            ],200);
+//        }
+        return $next($request);
     }
 }

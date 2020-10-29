@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -19,10 +20,10 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            $token = Auth::user()->createToken('Token Name')->accessToken;
+            $accesstoken= Auth::user()->createToken('Laravel Personal Access Client')->accessToken;
             return response()->json([
                 'code'=>200,
-                'data'=>$token
+                'data'=>$accesstoken
             ],200);
         }else{
             return response()->json([
