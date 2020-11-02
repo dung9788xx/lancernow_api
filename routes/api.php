@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('auth')->namespace('Api\Auth')->group(function (){
     Route::post('/login','LoginController@main');
 });
-Route::prefix('admin')->namespace('Api\Admin')->middleware(['auth:api'])->group(function (){
+Route::prefix('admin')->namespace('Api\Admin')->middleware([\App\Http\Middleware\AdminMiddleware::class,'auth:api'])->group(function (){
     Route::get('/users/list','IndexUserController@main');
 });
 
