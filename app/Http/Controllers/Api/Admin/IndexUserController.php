@@ -10,7 +10,7 @@ class IndexUserController extends Controller
 {
     public function main(Request $request)
     {
-           Log::info('aa');
+
            return 'aa';
     }
 }

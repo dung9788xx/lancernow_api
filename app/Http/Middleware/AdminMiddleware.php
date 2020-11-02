@@ -18,15 +18,14 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-//        Log::info(Auth::user());
-//        if( isset($request->user()->role) && $request->user()->role == UserRole::ADMIN){
-//            return $next($request);
-//        }else {
-//            return response()->json([
-//                'code'=>403,
-//                'data'=>"Permission denied"
-//            ],200);
-//        }
+        if( isset($request->user()->role) && $request->user()->role == UserRole::ADMIN){
+            return $next($request);
+        }else {
+            return response()->json([
+                'code'=>403,
+                'data'=>"Permission denied"
+            ],200);
+        }
         return $next($request);
     }
 }
