@@ -23,7 +23,7 @@ class AdminMiddleware
         }else {
             return response()->json([
                 'code'=>403,
-                'data'=>"Permission denied"
+                'message'=>"Permission denied"
             ],200);
         }
         return $next($request);

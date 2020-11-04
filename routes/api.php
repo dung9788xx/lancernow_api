@@ -17,8 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::prefix('auth')->namespace('Api\Auth')->group(function (){
+    Route::middleware('auth:api')->group(function (){
+        Route::get('logout','LogoutController@main');
+});
     Route::post('/login','LoginController@main');
 });
+
 Route::prefix('admin')->namespace('Api\Admin')->middleware([\App\Http\Middleware\AdminMiddleware::class,'auth:api'])->group(function (){
     Route::get('/users/list','IndexUserController@main');
 });

@@ -13,6 +13,6 @@ return [
     |
     */
 
-    'invalidEmailPassword' => 'Invalid email or password!'
-
+    'invalidEmailPassword' => 'Invalid email or password!',
+    'need_login' => 'Please login!'
 ];

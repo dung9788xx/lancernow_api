@@ -13,6 +13,7 @@ return [
     |
     */
 
-    'invalidEmailPassword' => 'Email hoặc mật khẩu không đúng!'
+    'invalidEmailPassword' => 'Email hoặc mật khẩu không đúng!',
+    'need_login' => 'Vui lòng đăng nhập!'
 
 ];

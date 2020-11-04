@@ -10,7 +10,10 @@ class IndexUserController extends Controller
 {
     public function main(Request $request)
     {
-
-           return 'aa';
+        Log::info('aaaa');
+           return response()->json([
+               'code' => 200,
+               'data' => 'aaa'
+           ],200);
     }
 }
