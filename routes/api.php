@@ -21,6 +21,7 @@ Route::prefix('auth')->namespace('Api\Auth')->group(function (){
         Route::get('logout','LogoutController@main');
 });
     Route::post('/login','LoginController@main');
+    Route::post('/forgot-password', 'ForgotPasswordController@main');
 });
 
 Route::prefix('admin')->namespace('Api\Admin')->middleware([\App\Http\Middleware\AdminMiddleware::class,'auth:api'])->group(function (){

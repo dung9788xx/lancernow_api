@@ -14,6 +14,8 @@ return [
     */
 
     'invalidEmailPassword' => 'Email hoặc mật khẩu không đúng!',
-    'need_login' => 'Vui lòng đăng nhập!'
+    'need_login' => 'Vui lòng đăng nhập!',
+    'email_not_found' => 'Không tìm thấy email!',
+    'try_after' => 'Vui lòng thử lại sau :minutes phút!'
 
 ];

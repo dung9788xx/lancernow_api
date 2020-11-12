@@ -14,5 +14,7 @@ return [
     */
 
     'invalidEmailPassword' => 'Invalid email or password!',
-    'need_login' => 'Please login!'
+    'need_login' => 'Please login!',
+    'email_not_found' => 'Email not found!',
+    'try_after' => 'Please try again after :minutes minutes!'
 ];
