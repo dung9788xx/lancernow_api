@@ -35,6 +35,10 @@ class ForgotPasswordController extends Controller
                 'message' => $result['message']
             ],200);
         }
+        return response()->json([
+            'code' => 200,
+            'message' => $result['data']
+        ],200);
     }
 
     public function getParams($request)

@@ -16,5 +16,11 @@ return [
     'invalidEmailPassword' => 'Invalid email or password!',
     'need_login' => 'Please login!',
     'email_not_found' => 'Email not found!',
-    'try_after' => 'Please try again after :minutes minutes!'
+    'try_after' => 'Please try again after :minutes minutes!',
+    'something_wrong' => 'Something went wrong please try again !',
+    'mail_sent' => 'Mail sent to your email inbox, if you don\'t see this email please check your spam mail box.',
+    'forgot_password_mail_subject' => 'Reset password from '.config('app.name'),
+    'forgot_password_mail_content' => 'Click this link bellow to reset your password, this link will be expired in '.config('mail.timeout_link_reset_password').' minutes.',
+    'reset_password_button' => 'Reset password',
+    'thanks' => "Cảm ơn"
 ];

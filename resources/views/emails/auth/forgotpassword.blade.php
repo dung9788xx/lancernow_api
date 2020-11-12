@@ -1,12 +1,9 @@
 @component('mail::message')
-# Introduction
+    {{trans('response.forgot_password_mail_content')}}
+    @component('mail::button', ['url' => $link])
+        {{trans('response.reset_password_button')}}
+    @endcomponent
 
-The body of your message.
-
-@component('mail::button', ['url' => ''])
-Button Text
-@endcomponent
-
-Thanks,<br>
-{{ config('app.name') }}
+    {{trans('response.thanks')}},
+    {{ config('app.name') }}
 @endcomponent

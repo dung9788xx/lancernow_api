@@ -132,6 +132,6 @@ return [
     */
 
     'log_channel' => env('MAIL_LOG_CHANNEL'),
-    'TIME_VALID_RESEND_MAIL' => env('TIME_VALID_RESEND_MAIL',15)
-
+    'TIME_VALID_RESEND_MAIL' => env('TIME_VALID_RESEND_MAIL',15),
+    'timeout_link_reset_password' => env('TIMEOUT_RESET_PASSWORD',15)
 ];
