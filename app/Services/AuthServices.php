@@ -4,6 +4,7 @@
 namespace App\Services;
 
 
+use App\Jobs\ResetPasswordSendMailJob;
 use App\Mail\ForgotPasswordMail;
 use App\User;
 use Carbon\Carbon;
@@ -34,7 +35,7 @@ class AuthServices
                     DB::table('password_resets')->where('email', $email)->delete();
                     $token = Str::random(30);
                     DB::table('password_resets')->insert(['email'=>$email,'token'=>$token, 'created_at' => Carbon::now()]);
-                    Mail::to("dungtv@hblab.vn")->send(new ForgotPasswordMail(config('app.client_url').'/reset_password?token='.$token));
+                    ResetPasswordSendMailJob::dispatch($email, $token);
                     $user->request_forgot_password_at = Carbon::now()->toDateTimeString();
                     $user->save();
                     DB::commit();
@@ -44,7 +45,7 @@ class AuthServices
                     ];
                 } catch (\Exception $e) {
                     DB::rollBack();
-                    Log::info($e->getMessage());
+                    Log::info($e->getMessage().$e->getLine());
                     return [
                         'success' => false,
                         'message' => trans('response.something_wrong')
