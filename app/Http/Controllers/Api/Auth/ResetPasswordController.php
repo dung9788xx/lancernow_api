@@ -7,49 +7,52 @@ use App\Services\AuthServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class ForgotPasswordController extends Controller
+class ResetPasswordController extends Controller
 {
+    /**
+     * @param Request $request
+     */
     private $authService;
-    public function __construct( AuthServices $authService)
+
+    public function __construct(AuthServices $authService)
     {
         $this->authService = $authService;
     }
 
-    /**
-     *aaa
-     */
     public function main(Request $request)
     {
         $params = $this->getParams($request);
         $validate = Validator::make($params, $this->rules());
-        if( $validate ->fails()){
+        if ($validate->fails()) {
             return response()->json([
                 'code' => 400,
                 'message' => $validate->errors()->first()
-            ],200);
+            ]);
         }
-        $result = $this->authService->sendMailForgotPassword($params['email']);
-        if($result['success'] == false) {
+        $result = $this->authService->resetPassword($params['token'], $params['password']);
+        if ($result['success'] == false) {
             return response()->json([
                 'code' => 400,
                 'message' => $result['message']
-            ],200);
+            ], 200);
         }
         return response()->json([
             'code' => 200,
             'data' => $result['data']
-        ],200);
+        ], 200);
+
     }
 
     public function getParams($request)
     {
-        return  $request->only(['email']);
+        return $request->only(['token', 'password']);
     }
 
     public function rules()
     {
         return [
-            'email' => 'required|email'
+            'token' => 'required|string',
+            'password' => 'required|string|min:6'
         ];
     }
 }

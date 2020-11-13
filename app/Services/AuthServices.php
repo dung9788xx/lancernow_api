@@ -6,12 +6,14 @@ namespace App\Services;
 
 use App\Jobs\ResetPasswordSendMailJob;
 use App\Mail\ForgotPasswordMail;
+use App\Model\PasswordReset;
 use App\User;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use phpseclib\Crypt\Hash;
 
 class AuthServices
 {
@@ -27,14 +29,14 @@ class AuthServices
                 'message' => trans('response.email_not_found')
             ];
         } else {
-            $lastTimeRequest = Carbon::createFromDate($user -> request_forgot_password_at)->diffInMinutes(Carbon::now());
+            $lastTimeRequest = Carbon::createFromDate($user->request_forgot_password_at)->diffInMinutes(Carbon::now());
             $validTime = config('mail.TIME_VALID_RESEND_MAIL');
-            if ( $user ->request_forgot_password_at ==null || $lastTimeRequest - $validTime >= 0) {
+            if ($user->request_forgot_password_at == null || $lastTimeRequest - $validTime >= 0) {
                 try {
                     DB::beginTransaction();
                     DB::table('password_resets')->where('email', $email)->delete();
                     $token = Str::random(30);
-                    DB::table('password_resets')->insert(['email'=>$email,'token'=>$token, 'created_at' => Carbon::now()]);
+                    DB::table('password_resets')->insert(['email' => $email, 'token' => $token, 'created_at' => Carbon::now()]);
                     ResetPasswordSendMailJob::dispatch($email, $token);
                     $user->request_forgot_password_at = Carbon::now()->toDateTimeString();
                     $user->save();
@@ -45,7 +47,7 @@ class AuthServices
                     ];
                 } catch (\Exception $e) {
                     DB::rollBack();
-                    Log::info($e->getMessage().$e->getLine());
+                    Log::info($e->getMessage() . $e->getLine());
                     return [
                         'success' => false,
                         'message' => trans('response.something_wrong')
@@ -59,5 +61,45 @@ class AuthServices
             }
         }
 
+    }
+
+    /**
+     *
+     */
+    public function resetPassword($tokenString, $password)
+    {
+        $token = PasswordReset::where('token', $tokenString)->first();
+        $validTokenTime = config('mail.timeout_link_reset_password');
+        if (!$token || Carbon::createFromDate($token->created_at->toDateTimeString())->diffInMinutes(Carbon::now()) > $validTokenTime) {
+            return [
+                'success' => false,
+                'message' => trans('response.token_expired')
+            ];
+        }
+        $user = User::where('email', $token->email)->first();
+        if (!$user) {
+            return [
+                'success' => false,
+                'message' => trans('response.something_wrong')
+            ];
+        }
+        try{
+            DB::beginTransaction();
+            $user->password = \Illuminate\Support\Facades\Hash::make($password);
+            $user->save();
+            PasswordReset::where('token', $tokenString)->delete();
+            DB::commit();
+            return [
+                'success' => true,
+                'data' => trans('response.password_changed')
+            ];
+        }catch (\Exception $exception){
+            DB::rollBack();
+            Log::info($exception->getMessage());
+            return [
+                'success' => false,
+                'message' => trans('response.something_wrong')
+            ];
+        }
     }
 }

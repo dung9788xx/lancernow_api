@@ -20,7 +20,9 @@ return [
     'something_wrong' => 'Xảy ra lỗi vui lòng thử lại sau!',
     'mail_sent' => 'Thư đã được gửi đến email của bạn, nếu không thấy vui lòng kiểm tra trong spam.',
     'forgot_password_mail_subject' => 'Yêu cầu khôi phục lại mật khẩu từ '.config('app.name'),
-    'forgot_password_mail_content' => 'Vui lòng bấm vào đường dẫn dưới đây để đặt lại mật khẩu, đường dẫn này sẽ hết hạn trong vòng '.config('mail.timeout_link_reset_password').' phút.',
+    'forgot_password_mail_content' => 'Vui lòng bấm vào đường dẫn dưới đây để đặt lại mật khẩu, không chia sẻ đường dẫn này cho bất cứ ai, đường dẫn sẽ hết hạn trong vòng '.config('mail.timeout_link_reset_password').' phút.',
     'reset_password_button' => 'Khôi phục lại mật khẩu',
-    'thanks' => 'Cảm ơn'
+    'thanks' => 'Cảm ơn',
+    'token_expired' => "Token đã hết hạn!",
+    'password_changed' => "Mật khẩu đã được đặt lại "
 ];

@@ -22,6 +22,7 @@ Route::prefix('auth')->namespace('Api\Auth')->group(function (){
 });
     Route::post('/login','LoginController@main');
     Route::post('/forgot-password', 'ForgotPasswordController@main');
+    Route::post('/reset-password', 'ResetPasswordController@main');
 });
 
 Route::prefix('admin')->namespace('Api\Admin')->middleware([\App\Http\Middleware\AdminMiddleware::class,'auth:api'])->group(function (){

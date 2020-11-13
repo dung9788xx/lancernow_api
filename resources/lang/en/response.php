@@ -20,7 +20,9 @@ return [
     'something_wrong' => 'Something went wrong please try again !',
     'mail_sent' => 'Mail sent to your email inbox, if you don\'t see this email please check your spam mail box.',
     'forgot_password_mail_subject' => 'Reset password from '.config('app.name'),
-    'forgot_password_mail_content' => 'Click this link bellow to reset your password, this link will be expired in '.config('mail.timeout_link_reset_password').' minutes.',
+    'forgot_password_mail_content' => "Click this link bellow to reset your password, don't not share this link to anyone, link will be expired in '.config('mail.timeout_link_reset_password').' minutes.",
     'reset_password_button' => 'Reset password',
-    'thanks' => "Cảm ơn"
+    'thanks' => "Cảm ơn",
+    'token_expired' => "Token is expired!",
+    'password_changed' => "Your password reset successfully "
 ];
