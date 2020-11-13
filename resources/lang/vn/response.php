@@ -23,6 +23,6 @@ return [
     'forgot_password_mail_content' => 'Vui lòng bấm vào đường dẫn dưới đây để đặt lại mật khẩu, không chia sẻ đường dẫn này cho bất cứ ai, đường dẫn sẽ hết hạn trong vòng '.config('mail.timeout_link_reset_password').' phút.',
     'reset_password_button' => 'Khôi phục lại mật khẩu',
     'thanks' => 'Cảm ơn',
-    'token_expired' => "Token đã hết hạn!",
+    'token_expired' => "Token đã hết hạn, vui lòng quay lại trang khôi mật khẩu",
     'password_changed' => "Mật khẩu đã được đặt lại "
 ];

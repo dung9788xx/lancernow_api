@@ -34,6 +34,6 @@ class ResetPasswordSendMailJob implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->email)->send(new ForgotPasswordMail(config('app.client_url').'/reset_password?token='.$this->token));
+        Mail::to($this->email)->send(new ForgotPasswordMail(config('app.client_url').'/reset_password'.$this->token));
     }
 }
