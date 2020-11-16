@@ -30,7 +30,7 @@ class ResetPasswordController extends Controller
             ]);
         }
         $result = $this->authService->resetPassword($params['token'], $params['password']);
-        if ($result['success'] == false) {
+        if (!$result['success']) {
             return response()->json([
                 'code' => 400,
                 'message' => $result['message']

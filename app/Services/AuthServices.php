@@ -83,7 +83,7 @@ class AuthServices
                 'message' => trans('response.something_wrong')
             ];
         }
-        try{
+        try {
             DB::beginTransaction();
             $user->password = \Illuminate\Support\Facades\Hash::make($password);
             $user->save();
@@ -93,9 +93,20 @@ class AuthServices
                 'success' => true,
                 'data' => trans('response.password_changed')
             ];
-        }catch (\Exception $exception){
+        } catch (\Exception $exception) {
             DB::rollBack();
             Log::info($exception->getMessage());
+            return [
+                'success' => false,
+                'message' => trans('response.something_wrong')
+            ];
+        }
+    }
+
+    public function signup($email, $password)
+    {
+        $user = User::where('email', $email)->first();
+        if ($user) {
             return [
                 'success' => false,
                 'message' => trans('response.something_wrong')

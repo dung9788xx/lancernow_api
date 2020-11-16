@@ -21,6 +21,7 @@ Route::prefix('auth')->namespace('Api\Auth')->group(function (){
         Route::get('logout','LogoutController@main');
 });
     Route::post('/login','LoginController@main');
+    Route::post('/signup', 'SignupController@main');
     Route::post('/forgot-password', 'ForgotPasswordController@main');
     Route::post('/reset-password', 'ResetPasswordController@main');
 });
