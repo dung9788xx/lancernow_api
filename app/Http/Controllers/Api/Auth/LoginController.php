@@ -23,7 +23,7 @@ class LoginController extends Controller
             $accesstoken= Auth::user()->createToken('Laravel Personal Access Client')->accessToken;
             return response()->json([
                 'code'=>200,
-                'data'=>$accesstoken
+                'data'=>['token'=>$accesstoken,'role'=>Auth::user()->role]
             ],200);
         }else{
             return response()->json([
