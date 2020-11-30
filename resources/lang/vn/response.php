@@ -25,5 +25,6 @@ return [
     'thanks' => 'Cảm ơn',
     'token_expired' => "Token đã hết hạn, vui lòng quay lại trang khôi mật khẩu",
     'password_changed' => "Mật khẩu đã được đặt lại ",
-    'email_existed' => 'Email đã tồn tại vui lòng thử email khác hoặc khôi phục lại mật khẩu'
+    'email_existed' => 'Email đã tồn tại vui lòng thử email khác hoặc khôi phục lại mật khẩu',
+    'verify_email' => 'Xác thực email từ '.config('app.name')
 ];

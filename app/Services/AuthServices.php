@@ -109,6 +109,25 @@ class AuthServices
         if ($user) {
             return [
                 'success' => false,
+                'message' => trans('response.email_existed')
+            ];
+        }
+
+        try {
+            DB::beginTransaction();
+            $user = User::create([
+                'email'=>$email,
+                'password'=>\Illuminate\Support\Facades\Hash::make($password),
+                'request_verify_at' => Carbon::now()->toDateTimeString()
+                ])->save();
+            if($user){
+
+            }
+        }catch (\Exception $exception){
+            DB::rollBack();
+            Log::info($exception->getMessage());
+            return [
+                'success' => false,
                 'message' => trans('response.something_wrong')
             ];
         }

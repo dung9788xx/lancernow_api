@@ -25,5 +25,6 @@ return [
     'thanks' => "Cảm ơn",
     'token_expired' => "Token is expired!",
     'password_changed' => "Your password reset successfully ",
-    'email_existed' => 'The email is existed try another email or reset your password'
+    'email_existed' => 'The email is existed try another email or reset your password',
+    'verify_email' => 'Verify email from '.config('app.name')
 ];
