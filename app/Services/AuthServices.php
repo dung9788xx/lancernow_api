@@ -5,6 +5,7 @@ namespace App\Services;
 
 
 use App\Jobs\ResetPasswordSendMailJob;
+use App\Jobs\SendMailRegister;
 use App\Mail\ForgotPasswordMail;
 use App\Model\PasswordReset;
 use App\User;
@@ -115,13 +116,15 @@ class AuthServices
 
         try {
             DB::beginTransaction();
+            $verify_code = uniqid('code');
             $user = User::create([
                 'email'=>$email,
                 'password'=>\Illuminate\Support\Facades\Hash::make($password),
-                'request_verify_at' => Carbon::now()->toDateTimeString()
+                'request_verify_at' => Carbon::now()->toDateTimeString(),
+                'verify_code' => $verify_code
                 ])->save();
             if($user){
-
+                SendMailRegister::dispatch($email, $verify_code);
             }
         }catch (\Exception $exception){
             DB::rollBack();

@@ -2,11 +2,13 @@
 
 namespace App\Jobs;
 
+use App\Mail\ForgotPasswordMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Mail;
 
 class SendMailRegister implements ShouldQueue
 {
@@ -26,6 +28,6 @@ class SendMailRegister implements ShouldQueue
      */
     public function handle()
     {
-        //
+        Mail::to($this->email)->send(new ForgotPasswordMail(config('app.client_url').'/verify_email'.$this->token));
     }
 }

@@ -3,8 +3,8 @@
 
 The body of your message.
 
-@component('mail::button', ['url' => ''])
-Button Text
+@component('mail::button', ['url' => $link])
+    {{trans('response.reset_password_button')}}
 @endcomponent
 
 Thanks,<br>

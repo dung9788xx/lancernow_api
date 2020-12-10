@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->timestamp('request_verify_at')->nullable();
             $table->timestamp('request_forgot_password_at')->nullable();
+            $table->string('verify_code')->unique()->nullable();
             $table->integer('role');
             $table->timestamps();
         });
