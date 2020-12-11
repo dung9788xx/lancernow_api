@@ -116,7 +116,7 @@ class AuthServices
 
         try {
             DB::beginTransaction();
-            $verify_code = uniqid('code');
+            $verify_code = uniqid();
             $user = User::create([
                 'email' => $params['email'],
                 'password' => \Illuminate\Support\Facades\Hash::make($params['password']),
