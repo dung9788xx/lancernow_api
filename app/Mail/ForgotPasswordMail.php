@@ -28,6 +28,6 @@ class ForgotPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->subject(trans('response.forgot_password_mail_subject'))->markdown('emails.auth.forgotpassword');
+        return $this->subject(trans('response.verify_account_mail_subject'))->markdown('emails.auth.verify_email');
     }
 }

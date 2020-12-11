@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
+use App\Enum\UserRole;
 use App\Http\Controllers\Controller;
 use App\Services\AuthServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class SignupController extends Controller
 {
@@ -27,7 +29,7 @@ class SignupController extends Controller
                 'message' => $validate->errors()->first()
             ], 200);
         }
-        $result = $this->authServices->signup($params['email'], $params['password']);
+        $result = $this->authServices->signup($params);
         if ($result['success'] == false) {
             return response()->json([
                 'code' => 400,
@@ -42,14 +44,16 @@ class SignupController extends Controller
 
     public function getParams($request)
     {
-        return $request->only(['email', 'password']);
+        return $request->only(['email', 'name', 'role', 'password']);
     }
 
     public function rules()
     {
         return [
             'email' => 'required|email',
-            'password' => 'required|string|min:6'
+            'name' => 'required|string',
+            'password' => 'required|string|min:6',
+            'role' => Rule::in([UserRole::HIRER, UserRole::LANCER])
         ];
     }
 }

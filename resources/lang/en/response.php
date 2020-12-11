@@ -26,5 +26,9 @@ return [
     'token_expired' => "Token is expired!",
     'password_changed' => "Your password reset successfully ",
     'email_existed' => 'The email is existed try another email or reset your password',
-    'verify_email' => 'Verify email from '.config('app.name')
+    'verify_email' => 'Verify email from '.config('app.name'),
+    'register_success' => 'Register success please check your email to verify account',
+    'verify_account_mail_subject' => 'Verify '.config('app.name').' account ',
+    'verify_account_mail_content' => 'Thank you for registered '.config('app.name').' account. Please click the link bellow to verify your email:',
+    'verify' => 'Verify email'
 ];

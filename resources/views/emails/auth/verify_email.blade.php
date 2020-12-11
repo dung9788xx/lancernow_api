@@ -1,12 +1,9 @@
 @component('mail::message')
-# Introduction
-
-The body of your message.
-
+ {{trans('response.verify_account_mail_content')}}
 @component('mail::button', ['url' => $link])
-    {{trans('response.reset_password_button')}}
+    {{trans('response.verify')}}
 @endcomponent
 
-Thanks,<br>
+ {{trans('response.thanks')}},<br>
 {{ config('app.name') }}
 @endcomponent

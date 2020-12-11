@@ -104,9 +104,9 @@ class AuthServices
         }
     }
 
-    public function signup($email, $password)
+    public function signup($params)
     {
-        $user = User::where('email', $email)->first();
+        $user = User::where('email', $params['email'])->first();
         if ($user) {
             return [
                 'success' => false,
@@ -118,14 +118,23 @@ class AuthServices
             DB::beginTransaction();
             $verify_code = uniqid('code');
             $user = User::create([
-                'email'=>$email,
-                'password'=>\Illuminate\Support\Facades\Hash::make($password),
+                'email' => $params['email'],
+                'password' => \Illuminate\Support\Facades\Hash::make($params['password']),
                 'request_verify_at' => Carbon::now()->toDateTimeString(),
+                'name' => $params['name'],
+                'role' => $params['role'],
                 'verify_code' => $verify_code
                 ])->save();
-            if($user){
-                SendMailRegister::dispatch($email, $verify_code);
+            if ($user) {
+                SendMailRegister::dispatch($params['email'], $verify_code);
+                DB::commit();
+                return [
+                    'success' => true,
+                    'data' => trans('response.register_success')
+                ];
+
             }
+            DB::rollBack();
         }catch (\Exception $exception){
             DB::rollBack();
             Log::info($exception->getMessage());

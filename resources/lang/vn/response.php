@@ -26,5 +26,9 @@ return [
     'token_expired' => "Token đã hết hạn, vui lòng quay lại trang khôi mật khẩu",
     'password_changed' => "Mật khẩu đã được đặt lại ",
     'email_existed' => 'Email đã tồn tại vui lòng thử email khác hoặc khôi phục lại mật khẩu',
-    'verify_email' => 'Xác thực email từ '.config('app.name')
+    'verify_email' => 'Xác thực email từ '.config('app.name'),
+    'register_success' => 'Đăng ký thành công vui lòng kiểm tra email để kích hoạt tài khoản',
+    'verify_account_mail_subject' => 'Xác thực tài khoản '.config('app.name'),
+    'verify_account_mail_content' => 'Cảm ơn bạn đã đăng ký tài khoản, vui lòng bấm vào link dưới đây để click hoạt tài khoản: ',
+    'verify' => 'Xác thực email'
 ];
