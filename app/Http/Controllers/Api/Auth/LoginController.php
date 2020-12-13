@@ -20,10 +20,10 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            $accesstoken= Auth::user()->createToken('Laravel Personal Access Client')->accessToken;
+            $accessToken= Auth::user()->createToken('Laravel Personal Access Client')->accessToken;
             return response()->json([
                 'code'=>200,
-                'data'=>['token'=>$accesstoken,'role'=>Auth::user()->role]
+                'data'=>['token'=>$accessToken,'role'=>Auth::user()->role]
             ],200);
         }else{
             return response()->json([
